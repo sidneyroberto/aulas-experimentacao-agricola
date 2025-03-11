@@ -1,6 +1,7 @@
 #toto = c(39, 23, 25, 34, 28, 24, 23, 25, 61, 44, 56, 24, 26, 29, 39, 40, 39, 3540)
 #toto = c(39, 23, 25, 34, 28, 24, 23, 25, 61, 44, 56, 24, 26, 29, 39, 40, 39)
 
+
 # Gera um banco de dados aleatório
 # No exemplo, gera 30000 dados, com média de 22 e desvio padrão de 7
 toto = rnorm(5000, 22, 7)
