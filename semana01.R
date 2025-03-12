@@ -1,3 +1,5 @@
+# Instalando dependências necessárias
+
 if (!require("modeest")) install.packages("modeest", repos = "http://cran.rstudio.com/")
 library(modeest)
 
@@ -12,7 +14,7 @@ library(pastecs)
 
 
 # Gera um banco de dados aleatório
-# No exemplo, gera 30000 dados, com média de 22 e desvio padrão de 7
+# No exemplo, gera 5000 dados, com média de 22 e desvio padrão de 7
 toto <- rnorm(5000, 22, 7)
 
 # Medidas de posição
