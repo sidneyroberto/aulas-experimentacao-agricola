@@ -52,8 +52,8 @@ bartlett.test(erros ~ estudantes$Genero)
 boxplot(estudantes$Massa ~ estudantes$Genero)
 
 dic(
-  estudantes$Genero, # tratamento
-  estudantes$Massa, # resposta
+  massas_generos$Genero, # tratamento
+  massas_generos$Massa, # resposta
   quali = TRUE, # o tratamento é qualitativo
   mcomp = "tukey", 
   nl = FALSE,
@@ -62,6 +62,14 @@ dic(
   sigF = 0.05,
   unfold = NULL
 )
+
+anava_pessoas = aov(massas_generos$Massa ~ massas_generos$Genero)
+summary(anava_pessoas)
+
+erros = residuals(anava_pessoas)
+shapiro.test(erros)
+
+bartlett.test(erros ~ massas_generos$Genero)
 
 
 
