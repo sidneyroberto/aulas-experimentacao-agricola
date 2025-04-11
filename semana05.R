@@ -1,5 +1,6 @@
 # Começando com Delineamento por Quadrado Latino
 
+if (!require("ExpDes.pt")) install.packages("ExpDes.pt", repos = "http://cran.rstudio.com/")
 library(ExpDes.pt)
 
 boxplot(dados_producao$Producao ~ dados_producao$Bioestimulante)
