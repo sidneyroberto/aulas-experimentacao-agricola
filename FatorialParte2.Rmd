@@ -1,0 +1,68 @@
+---
+title: "FatorialParte2"
+output: html_document
+---
+
+```{r}
+library(readxl)
+dadosFat2 <- read_excel("DadosSemana6_7.xlsx")
+View(dadosFat2)
+```
+
+```{r}
+boxplot(dadosFat2$Altura ~ dadosFat2$Tratamento)
+```
+```{r}
+# Precisou elevar a altura ao quadrado para atender aos pressupostos de normalidade e homocedasticidade
+anova = aov(I(dadosFat2$Altura^2) ~ dadosFat2$Bloco + dadosFat2$Fungo + dadosFat2$Substrato + dadosFat2$Fungo * dadosFat2$Substrato)
+summary(anova)
+
+erros = anova$residuals
+summary(erros)
+```
+```{r}
+shapiro.test(erros)
+```
+```{r}
+bartlett.test(erros ~ dadosFat2$Tratamento)
+```
+```{r}
+if (!require("ExpDes.pt")) install.packages("ExpDes.pt", repos = "http://cran.rstudio.com/")
+library(ExpDes.pt)
+```
+```{r}
+fat2.dbc(
+  dadosFat2$Fungo,
+  dadosFat2$Substrato,
+  dadosFat2$Bloco,
+  dadosFat2$Altura^2,
+  quali = c(TRUE, TRUE),
+  mcomp = "tukey",
+  fac.names = c("Fungo", "Substrato"),
+  sigT = 0.05,
+  sigF = 0.05,
+  unfold = NULL
+)
+```
+```{r}
+if (!require("dplyr")) install.packages("dplyr", repos = "http://cran.rstudio.com/")
+library(dplyr)
+```
+
+```{r}
+dadosMedia <- dadosFat2%>%
+  tibble::as_tibble()%>%
+  group_by(Fungo, Substrato)%>%
+  summarise(altura = mean(Altura))
+```
+```{r}
+if (!require("ggplot2")) install.packages("ggplot2", repos = "http://cran.rstudio.com/")
+library(ggplot2)
+```
+```{r}
+ggplot(data = dadosMedia, mapping = aes(x = Substrato, y = altura, colour = Fungo)) +
+  geom_point(size = 5)+
+  theme_minimal()
+```
+
+

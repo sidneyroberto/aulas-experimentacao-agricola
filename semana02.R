@@ -25,6 +25,9 @@ bartlett.test(DESVIOS~dados_semana02$Fungicida)
 
 ################################################################################
 
+if (!require("ExpDes.pt")) install.packages("ExpDes.pt", repos = "http://cran.rstudio.com/")
+library(ExpDes.pt)
+
 ?dic
 
 dic(
